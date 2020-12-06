@@ -1,0 +1,5 @@
+package co.com.moviedb.moviedb.api.services.movie.repository;
+
+public class MovieRepository {
+
+}

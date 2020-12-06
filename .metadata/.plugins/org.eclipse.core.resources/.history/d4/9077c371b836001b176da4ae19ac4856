@@ -1,0 +1,18 @@
+package co.com.moviedb.moviedb.api.services.movie.repository;
+
+import java.io.IOException;
+
+import org.springframework.http.HttpMethod;
+
+import co.com.moviedb.moviedb.api.services.movie.model.BasicMovieResultDTO;
+import co.com.moviedb.moviedb.api.services.movie.model.BasicResponseDTO;
+import co.com.moviedb.moviedb.framework.error.InformationException;
+import co.com.moviedb.moviedb.framework.repository.BaseApiRepository;
+
+public class MovieRepository extends BaseApiRepository{
+
+	public BasicResponseDTO<BasicMovieResultDTO> getMostPopularMovies(String address) throws IOException, InformationException {
+		BasicResponseDTO<BasicMovieResultDTO> resp = consumeService(address, null, HttpMethod.GET.toString(), null, 30000, 30000, BasicResponseDTO.class);
+		return resp;		
+	}
+}

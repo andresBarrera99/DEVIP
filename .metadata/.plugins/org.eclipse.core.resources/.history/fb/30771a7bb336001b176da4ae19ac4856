@@ -1,0 +1,100 @@
+package co.com.moviedb.moviedb.framework.util;
+
+import java.io.IOException;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+
+public class JsonUtils {
+	
+	private static ObjectMapper objectMapper;
+	
+	public JsonUtils() {
+		super();
+	}
+	
+	private static ObjectMapper getObjectMapper() {
+		ObjectMapper objectMapperlocal = objectMapper;
+		if (objectMapperlocal == null) {
+			synchronized (JsonUtils.class) {
+				objectMapperlocal = objectMapper;
+				if (objectMapperlocal == null) {
+					try {
+						objectMapper = new ObjectMapper();
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+				
+			}
+		}
+		return objectMapper;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Map<String, Object> getMapFromJson(String jsonData) throws Exception{
+		return getObjectFromJson(jsonData,Map.class);
+	}
+
+	public static <T> T getObjectFromJson(String jsonData, Class<T> classToParse) throws JsonMappingException, JsonProcessingException {
+		return createObjectMapper().readValue(jsonData, classToParse);
+	}
+
+	public static <T> T getObjectFromMap(Map<String,Object>  map, Class<T> classToParse) {
+		return getObjectMapper().convertValue(map, classToParse);
+	}
+	
+	public static String getJsonFromObject(Object obj) throws JsonProcessingException {
+		return getJsonFromObject(obj,true,false);
+	}
+	
+	public static String getJsonFromObject(Object obj, boolean onlyNonEmpty, boolean singleQuoted) throws JsonProcessingException {
+		ObjectMapper mapper = createObjectMapper();
+		if (onlyNonEmpty) {
+			mapper.setSerializationInclusion(Include.NON_EMPTY);
+		}
+		if (singleQuoted) {
+			SimpleModule module = new SimpleModule();
+			module.addSerializer(String.class, new SingleQuotedStringSerializer(String.class));
+			mapper.registerModule(module);
+		}
+		ObjectWriter writer = mapper.writer();
+		return writer.writeValueAsString(obj);
+	}
+
+	
+	public static ObjectMapper createObjectMapper() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(MapperFeature.USE_STD_BEAN_NAMING, true);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(com.fasterxml.jackson.core.json.JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true);
+		mapper.configure(com.fasterxml.jackson.core.json.JsonReadFeature.ALLOW_UNQUOTED_FIELD_NAMES.mappedFeature(), true);
+		mapper.configure(com.fasterxml.jackson.core.json.JsonReadFeature.ALLOW_SINGLE_QUOTES.mappedFeature(), true);
+		return mapper;		
+	}
+
+}
+
+class SingleQuotedStringSerializer extends StdSerializer<String>{
+	private static final long serialVersionUID = 1680153857056983243L;
+
+	protected SingleQuotedStringSerializer(Class<String> classToParse) {
+		super(classToParse);
+	}
+
+	@Override
+	public void serialize(String value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+		value = value.replace("'", "\\'");
+		gen.writeRawValue("'"+value+"'");
+	}
+}

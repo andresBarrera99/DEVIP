@@ -1,0 +1,100 @@
+package co.com.moviedb.moviedb.framework.repository;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+
+import co.com.moviedb.moviedb.framework.error.InformationException;
+import co.com.moviedb.moviedb.framework.util.JsonUtils;
+import co.com.moviedb.moviedb.framework.util.TextManager;
+
+public class BaseApiRepository {
+	protected static final String HEADER_CONTENT_TYPE = "Content-Type";
+
+	protected <T> T consumeService(String address, String requestBody, String method, Map<String, String> headers,
+			Integer connectionTimeOut, Integer readTimeOut, Class<T> classToReturn) throws IOException, InformationException {
+		URL url = new URL(address);
+		HttpURLConnection httpConnetion = (HttpURLConnection) url.openConnection();
+		httpConnetion.setConnectTimeout(
+				null != connectionTimeOut ? connectionTimeOut > 0 ? connectionTimeOut : 60000 : 60000);
+		if (null != readTimeOut && readTimeOut > 0) {
+			httpConnetion.setReadTimeout(readTimeOut);
+		}
+		httpConnetion.setDoOutput(true);
+		httpConnetion.setRequestMethod(method);
+
+		boolean hasContentType = false;
+		if (null != headers) {
+			for (Map.Entry<String, String> entry : headers.entrySet()) {
+				httpConnetion.setRequestProperty(entry.getKey(), entry.getValue());
+				if (entry.getKey().equalsIgnoreCase(HEADER_CONTENT_TYPE)) {
+					hasContentType = true;
+				}
+			}
+		}
+
+		if (!hasContentType) {
+			httpConnetion.setRequestProperty(HEADER_CONTENT_TYPE, "application/json");
+		}
+		if (!TextManager.isNull(requestBody)) {
+			try (OutputStream os = httpConnetion.getOutputStream();
+					OutputStreamWriter osw = new OutputStreamWriter(os, StandardCharsets.UTF_8);) {
+				osw.write(requestBody);
+				osw.flush();
+			} catch (ConnectException e) {
+				throw new ConnectException("Peticion rechazada desde " + address);
+			}
+			httpConnetion.connect();
+		}
+		
+
+		BufferedReader br = null;
+		StringBuilder response;
+		try {
+			br =new BufferedReader(new InputStreamReader( httpConnetion.getInputStream(),StandardCharsets.UTF_8));
+			response = new StringBuilder();
+			String responseLine = null;
+			while ((responseLine = br.readLine()) != null) {
+				response.append(responseLine.trim());
+			}
+		} catch (IOException e) {
+			br =new BufferedReader(new InputStreamReader( httpConnetion.getErrorStream(),StandardCharsets.UTF_8));
+			response = new StringBuilder();
+			String responseLine = null;
+			while ((responseLine = br.readLine()) != null) {
+				response.append(responseLine.trim());
+			}
+			Map<String,Object> map = JsonUtils.getMapFromJson(response.toString());
+			throw new InformationException((String)map.get("status_message"), (Integer)map.get("status_code"));
+		}
+		return JsonUtils.getObjectFromJson(response.toString(), classToReturn);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) {
+		BaseApiRepository rpo = new BaseApiRepository();
+		try {
+			Map<String,Object>  rta= rpo.consumeService(
+					"https://api.themoviedb.org/3/movie/152?api_key=ca8294722fd46ea0eba12a1818ff205b&language=es-CO", 
+					null, 
+					"GET", 
+					null, 
+					30000, 
+					30000, 
+					Map.class);
+			
+			System.out.println(rta.toString());
+		} catch (IOException | InformationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

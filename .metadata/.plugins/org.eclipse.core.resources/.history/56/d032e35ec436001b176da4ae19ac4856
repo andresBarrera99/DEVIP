@@ -1,0 +1,52 @@
+package co.com.moviedb.moviedb.api.services.movie.service;
+
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
+import co.com.moviedb.moviedb.api.services.movie.model.BasicMovieResultDTO;
+import co.com.moviedb.moviedb.api.services.movie.model.BasicResponseDTO;
+import co.com.moviedb.moviedb.api.services.movie.repository.MovieRepository;
+import co.com.moviedb.moviedb.framework.error.InformationException;
+import co.com.moviedb.moviedb.framework.service.BaseService;
+
+@Component
+@PropertySource("classpath:application.properties")
+public class MovieService extends BaseService<MovieRepository> {
+	
+	private static String mostPopularAddress;
+	private static String apiEndPoint;
+	private static String topRatedAddress;
+	private static String searchMoviesAddress;
+	
+	public BasicResponseDTO<BasicMovieResultDTO> getMostPopularMovies(String page) throws IOException, InformationException {
+		String address = apiEndPoint+ mostPopularAddress.replace("{pg}", page);
+		return getRepository().getMostPopularMovies(address);
+	}
+
+	@Value("${moviedb.api.popular.movies}")
+	public void setMostPopularAddress(String mostPopularAddress) {
+		MovieService.mostPopularAddress = mostPopularAddress;
+	}
+
+	@Value("${moviedb.api.endpoint}")
+	public static void setApiEndPoint(String apiEndPoint) {
+		MovieService.apiEndPoint = apiEndPoint;
+	}
+
+	@Value("${moviedb.api.top.rated.movie}")
+	public static void setTopRatedAddress(String topRatedAddress) {
+		MovieService.topRatedAddress = topRatedAddress;
+	}
+
+	@Value("${moviedb.api.search.movies}")
+	public static void setSearchMoviesAddress(String searchMoviesAddress) {
+		MovieService.searchMoviesAddress = searchMoviesAddress;
+	}
+	
+	
+	
+	
+}

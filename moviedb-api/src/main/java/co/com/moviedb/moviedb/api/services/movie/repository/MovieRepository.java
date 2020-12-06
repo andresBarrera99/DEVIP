@@ -1,0 +1,31 @@
+package co.com.moviedb.moviedb.api.services.movie.repository;
+
+import java.io.IOException;
+
+import org.springframework.http.HttpMethod;
+
+import co.com.moviedb.moviedb.api.services.movie.model.BasicMovieResultDTO;
+import co.com.moviedb.moviedb.api.services.movie.model.BasicResponseDTO;
+import co.com.moviedb.moviedb.api.services.movie.model.MovieDetailResponseDTO;
+import co.com.moviedb.moviedb.framework.error.InformationException;
+import co.com.moviedb.moviedb.framework.repository.BaseApiRepository;
+
+@SuppressWarnings("unchecked")
+public class MovieRepository extends BaseApiRepository{
+
+	public BasicResponseDTO<BasicMovieResultDTO> getMostPopularMovies(String address) throws IOException, InformationException {
+		return ( BasicResponseDTO<BasicMovieResultDTO>) consumeService(address, null, HttpMethod.GET.toString(), null, 30000, 30000, BasicResponseDTO.class);		
+	}
+	
+	public BasicResponseDTO<BasicMovieResultDTO> getTopRatedMovies(String address) throws IOException, InformationException {
+		return ( BasicResponseDTO<BasicMovieResultDTO>) consumeService(address, null, HttpMethod.GET.toString(), null, 30000, 30000, BasicResponseDTO.class);		
+	}
+	
+	public BasicResponseDTO<BasicMovieResultDTO> searchMovie(String address) throws IOException, InformationException {
+		return ( BasicResponseDTO<BasicMovieResultDTO>) consumeService(address, null, HttpMethod.GET.toString(), null, 30000, 30000, BasicResponseDTO.class);		
+	}
+	
+	public MovieDetailResponseDTO getMovieDetail(String address) throws IOException, InformationException {
+		return consumeService(address, null, HttpMethod.GET.toString(), null, 30000, 30000, MovieDetailResponseDTO.class);		
+	}
+}

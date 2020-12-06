@@ -1,0 +1,26 @@
+package co.com.moviedb.moviedb.api.services.movie.service;
+
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import co.com.moviedb.moviedb.api.services.movie.model.BasicMovieResultDTO;
+import co.com.moviedb.moviedb.api.services.movie.model.BasicResponseDTO;
+import co.com.moviedb.moviedb.api.services.movie.repository.MovieRepository;
+import co.com.moviedb.moviedb.framework.error.InformationException;
+import co.com.moviedb.moviedb.framework.service.BaseService;
+
+@Component
+public class MovieService extends BaseService<MovieRepository> {
+	
+	@Value("${moviedb.api.popular.movies}")
+	private String mostPopularAddress;
+	
+	public BasicResponseDTO<BasicMovieResultDTO> getMostPopularMovies(String page) throws IOException, InformationException {
+		System.err.println("valor: "+ mostPopularAddress);
+		String address = mostPopularAddress.replaceAll("{page}", page);
+		return getRepository().getMostPopularMovies(address);
+	}
+	
+}

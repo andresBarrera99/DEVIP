@@ -1,0 +1,21 @@
+package co.com.moviedb.moviedb.api.services.movie.model;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class BasicMovieResponseDTO  <B extends Object>{
+
+	@JsonProperty(value="page")
+	private Integer page;
+	
+	@JsonProperty(value="results")
+	private List<Object> results;
+	
+	@JsonProperty(value="total_pages")
+	private Integer totalPages;
+	
+	@JsonProperty(value="total_results")
+	private Integer totalResult;
+
+}

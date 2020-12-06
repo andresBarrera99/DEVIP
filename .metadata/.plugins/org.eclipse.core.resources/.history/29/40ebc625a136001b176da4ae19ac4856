@@ -1,0 +1,8 @@
+package co.com.moviedb.moviedb.api.services.movie.model;
+
+public class GenresDTO {
+	
+	private Integer id;
+	private String name;
+
+}

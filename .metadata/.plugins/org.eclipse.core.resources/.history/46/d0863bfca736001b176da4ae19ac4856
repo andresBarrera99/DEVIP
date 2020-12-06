@@ -1,0 +1,7 @@
+package co.com.moviedb.moviedb.framework.spring;
+
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+public class AppConfig implements WebMvcConfigurer {
+
+}

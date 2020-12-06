@@ -1,0 +1,9 @@
+package co.com.moviedb.moviedb.api.services.movie.model;
+
+import java.util.Map;
+
+public class ResponseCodes {
+	public static final Map<Integer, String> responseCodes;
+	
+
+}

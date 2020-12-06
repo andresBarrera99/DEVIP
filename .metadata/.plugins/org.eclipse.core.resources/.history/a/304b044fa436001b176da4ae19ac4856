@@ -1,0 +1,3 @@
+spring.application.name= moviedb-api
+
+server.port= 19011

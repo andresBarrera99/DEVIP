@@ -1,0 +1,12 @@
+package co.com.moviedb.moviedb.api.services.movie.repository;
+
+import co.com.moviedb.moviedb.api.services.movie.model.BasicMovieResultDTO;
+import co.com.moviedb.moviedb.api.services.movie.model.BasicResponseDTO;
+import co.com.moviedb.moviedb.framework.repository.BaseApiRepository;
+
+public class MovieRepository extends BaseApiRepository{
+
+	public BasicResponseDTO<BasicMovieResultDTO> getMostPopularMovies(Integer page) {
+		return null;
+	}
+}

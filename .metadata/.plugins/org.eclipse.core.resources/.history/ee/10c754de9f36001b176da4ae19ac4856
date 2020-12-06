@@ -1,0 +1,10 @@
+package co.com.moviedb.moviedb.api.services.movie.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class ProductionCountries {
+	@JsonProperty(value = "iso_639_1")
+	private String iso;
+	@JsonProperty(value = "name")
+	private String name;
+}

@@ -1,0 +1,163 @@
+package co.com.moviedb.moviedb.api.services.movie.model;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class BasicMovieResultDTO {
+	@JsonProperty(value="page")
+	protected Boolean adult;
+	
+	@JsonProperty(value="backdrop_path")
+	protected String backdropPath;
+
+	@JsonProperty(value="genre_ids")
+	protected List<Integer> genreIDs;
+	
+	@JsonProperty(value="id")
+	protected String id;
+	
+	@JsonProperty(value="original_language")
+	protected String originalLanguage;
+
+	@JsonProperty(value="original_title")
+	protected String originalTitle;
+	
+	@JsonProperty(value="overview")
+	protected String overview;
+	
+	@JsonProperty(value="popularity")
+	protected Integer popularity;
+	
+	@JsonProperty(value="poster_path")
+	protected String posterPath;
+
+	@JsonProperty(value="release_date")
+	protected Date releaseDate;
+
+	@JsonProperty(value="title")
+	protected String title;
+
+	@JsonProperty(value="video")
+	protected Boolean video;
+
+	@JsonProperty(value="vote_average")
+	protected Integer voteAverage;
+
+	@JsonProperty(value="vote_count")
+	protected Integer voteCount;
+	
+	public Boolean getAdult() {
+		return adult;
+	}
+	
+	public void setAdult(Boolean adult) {
+		this.adult = adult;
+	}
+	
+	public String getBackdropPath() {
+		return backdropPath;
+	}
+	
+	public void setBackdropPath(String backdropPath) {
+		this.backdropPath = backdropPath;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getOriginalLanguage() {
+		return originalLanguage;
+	}
+	
+	public void setOriginalLanguage(String originalLanguage) {
+		this.originalLanguage = originalLanguage;
+	}
+	
+	public String getOriginalTitle() {
+		return originalTitle;
+	}
+	
+	public void setOriginalTitle(String originalTitle) {
+		this.originalTitle = originalTitle;
+	}
+	
+	public String getOverview() {
+		return overview;
+	}
+	
+	public void setOverview(String overview) {
+		this.overview = overview;
+	}
+	
+	public Integer getPopularity() {
+		return popularity;
+	}
+	
+	public void setPopularity(Integer popularity) {
+		this.popularity = popularity;
+	}
+	
+	public String getPosterPath() {
+		return posterPath;
+	}
+	
+	public void setPosterPath(String posterPath) {
+		this.posterPath = posterPath;
+	}
+	
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public Boolean getVideo() {
+		return video;
+	}
+	
+	public void setVideo(Boolean video) {
+		this.video = video;
+	}
+	
+	public Integer getVoteAverage() {
+		return voteAverage;
+	}
+	
+	public void setVoteAverage(Integer voteAverage) {
+		this.voteAverage = voteAverage;
+	}
+	
+	public Integer getVoteCount() {
+		return voteCount;
+	}
+	
+	public void setVoteCount(Integer voteCount) {
+		this.voteCount = voteCount;
+	}
+	
+	@Override
+	public String toString() {
+		return "BasicMovieResultDTO [adult=" + adult + ", backdropPath=" + backdropPath + ", id=" + id
+				+ ", originalLanguage=" + originalLanguage + ", originalTitle=" + originalTitle + ", overview="
+				+ overview + ", popularity=" + popularity + ", posterPath=" + posterPath + ", releaseDate="
+				+ releaseDate + ", title=" + title + ", video=" + video + ", voteAverage=" + voteAverage
+				+ ", voteCount=" + voteCount + "]";
+	}
+	
+	
+}

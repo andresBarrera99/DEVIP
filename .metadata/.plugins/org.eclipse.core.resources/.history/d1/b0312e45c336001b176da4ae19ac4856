@@ -1,0 +1,8 @@
+spring.application.name= moviedb-api
+
+server.port= 19011
+moviedb.api.endpoint= https://api.themoviedb.org/3/
+moviedb.api.search.movies=search/movie?api_key=ca8294722fd46ea0eba12a1818ff205b&language=es-ES&query={q}&page={pg}
+moviedb.api.top.rated.movie= movie/top_rated?api_key=ca8294722fd46ea0eba12a1818ff205b&language=es-ES&page={pg}
+moviedb.api.popular.movies= movie/popular?api_key=ca8294722fd46ea0eba12a1818ff205b&language=es-ES&page={pg}
+moviedb.api.movie.detail= movie/{movie_id}?api_key=ca8294722fd46ea0eba12a1818ff205b&language=es-ES

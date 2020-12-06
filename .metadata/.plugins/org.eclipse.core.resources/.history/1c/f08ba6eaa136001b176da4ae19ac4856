@@ -1,0 +1,13 @@
+package co.com.moviedb.moviedb.api.services.movie.model;
+
+public class BasicMovieResultDTO {
+	protected Boolean adult;
+	protected String backdropPath;
+	protected String id;
+	protected String originalLanguage;
+	protected String originalTitle;
+	protected String overview;
+	protected Integer popularity;
+	protected String poster_path;
+	protected Date release_date;
+}

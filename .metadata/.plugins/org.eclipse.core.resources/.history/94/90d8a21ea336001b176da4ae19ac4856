@@ -1,0 +1,19 @@
+package co.com.moviedb.moviedb.api.services.movie.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class CollectionDTO {
+	
+	@JsonProperty(value="id")
+	private Integer id;
+	
+	@JsonProperty(value="name")
+	private String name;
+	
+	@JsonProperty(value="poster_path")
+	private String posterPath;
+	
+	@JsonProperty(value="backdrop_path")
+	private String backdropPath;
+
+}

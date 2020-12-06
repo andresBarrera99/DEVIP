@@ -1,0 +1,13 @@
+package co.com.moviedb.moviedb.api.services.movie.model;
+
+public class ProductionCompaniesDTO {
+	
+	private Integer id;
+	
+	private String logoPath;
+	
+	private String name;
+	
+	private originCountry;
+
+}

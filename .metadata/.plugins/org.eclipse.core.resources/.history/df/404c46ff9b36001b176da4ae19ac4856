@@ -1,0 +1,13 @@
+package co.com.moviedb.moviedb.framework;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class MoviedbFrameworkApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

@@ -1,0 +1,14 @@
+package co.com.moviedb.moviedb.api.services.movie.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class SpokenLanguagesDTO {
+	@JsonProperty(value = "english_name")
+	String englishName;
+	@JsonProperty(value = "iso_639_1")
+	String iso;
+	@JsonProperty(value = "name")
+	String name;
+	
+
+}

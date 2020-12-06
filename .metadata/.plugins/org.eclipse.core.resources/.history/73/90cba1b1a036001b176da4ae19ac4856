@@ -1,0 +1,8 @@
+package co.com.moviedb.moviedb.api.services.movie.model;
+
+public class BasicMovieResponseDTO {
+	
+	private Integer page;
+	private List<Object> result;
+
+}

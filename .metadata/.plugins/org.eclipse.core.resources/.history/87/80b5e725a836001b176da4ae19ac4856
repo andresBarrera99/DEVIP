@@ -1,0 +1,12 @@
+package co.com.moviedb.moviedb.framework.spring;
+
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+public class AppConfig implements WebMvcConfigurer {
+	
+	private static final String UTF8 = "UTF-8";
+	
+	@Value()
+	private String dateTimeFormat;
+
+}
