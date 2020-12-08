@@ -1,0 +1,76 @@
+<ion-content [fullscreen]="true" #pageTop>
+  <h1 class="text-center font-weight-bold">Buscar Peliculas</h1>
+  <div class="border-top my-3"></div>
+  <ion-grid class="container">
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="searchMoviesForm" (ngSubmit)="searchMovies(searchMoviesForm.value)">
+          <ion-grid class="mt-5" size-sm="6" size-xs="8">
+            <ion-row class="row justify-content-center mt-2" size-sm="2" size-xs="3">
+              <ion-col size-sm="4" size-xs="8">
+                <button type="button" class="btn btn-success" (click)='getMostPopular()'>Más populares</button>
+                <button type="button" class="btn btn-secondary ml-2" (click)='getTopRanked()'>Mejor votadas</button>
+              </ion-col>
+              <ion-col size-sm="4" size-xs="8">
+                <div class="input-group">
+                  <span class="input-group-text">Nombre Pelicula
+                  </span>
+                  <ion-input type="text" class="form-control" style="display: inline-flex;" placeholder="Pelicula"
+                    aria-label="Pelicula" formControlName="query"></ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-sm="4" size-xs="8">
+                <button type="submit" class="btn btn-primary" [disabled]="!searchMoviesForm.valid">Consultar</button>
+                <button type="button" class="btn btn-danger ml-2" (click)='searchMoviesForm.reset()'>limpiar</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="response">
+      <ion-col col-8>
+        <div >
+          <div class="table-wrapper">
+            <div class="table-title">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h2>Lista de Peliculas</h2>
+                </div>
+              </div>
+            </div>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Título</th>
+                  <th>Fecha de lanzamiento</th>
+                  <th>Votación</th>
+                  <th>Ver Detalles</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style=" background:rgba(0,0,0,0.0);font-size: 16px" *ngFor="let movie of response.results" >
+                  <td>{{movie.id}}</td>
+                  <td >{{movie.title}}</td>
+                  <td >{{movie.release_date}}</td>
+                  <td >{{movie.vote_average}}</td>    
+                  <td class="text-center">
+                    <ion-icon name="arrow-forward-outline" (click)='onMovieClick(movie)'></ion-icon>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="response && response.total_pages>0">
+      <ion-col class="text-center">
+        <span>
+          <ion-icon name="arrow-back-circle-outline" (click)='backPage()'></ion-icon>{{response.page}} de {{response.total_pages}} <ion-icon name="arrow-forward-circle-outline"  (click)='nextPage()'></ion-icon>
+        </span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

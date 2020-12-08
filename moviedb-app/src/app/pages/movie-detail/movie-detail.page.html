@@ -1,0 +1,101 @@
+<ion-content [fullscreen]="true">
+  <h1 class="text-center font-weight-bold">Detalle Pelicula</h1>
+  <div class="border-top my-3"></div>
+  <div class="container" *ngIf="movie">
+    <ion-grid class="mt-5">
+      <ion-row class="row justify-content-center mt-2">
+        <ion-col size-sm="6" size-xs="8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Título</span>
+            </div>
+            <ion-input type="text" class="form-control-plaintext" style="display: inline-flex;"
+              [(ngModel)]="movie.title" readonly></ion-input>
+          </div>
+        </ion-col>
+        <ion-col size-sm="6" size-xs="8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Fecha lanzamiento</span>
+            </div>
+            <ion-datetime class="form-control-plaintext" displayFormat="YYYY-MM-DD" min="1900"
+              [(ngModel)]="movie.release_date" readonly max="2050"></ion-datetime>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row mt-2">
+        <ion-col>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Descripción</span>
+            </div>
+            <ion-textarea class="form-control-plaintext" [(ngModel)]="movie.overview" readonly></ion-textarea>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row justify-content-center mt-2">
+        <ion-col >
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Url:</span>
+            </div>
+            <ion-input type="text" class="form-control-plaintext" style="display: inline-flex;"
+              [(ngModel)]="movie.homepage" readonly></ion-input>
+          </div>
+        </ion-col>        
+      </ion-row>
+      <ion-row class="row mt-2">
+        <ion-col>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Géneros</span>
+            </div>
+            <ion-input type="text" class="form-control-plaintext" style="display: inline-flex;"
+              [(ngModel)]="movie.genres" readonly></ion-input>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row mt-2">
+        <ion-col>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Países de producción</span>
+            </div>
+            <ion-input type="text" class="form-control-plaintext" style="display: inline-flex;"
+            [(ngModel)]="movie.production_countries" readonly></ion-input>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row mt-2">
+        <ion-col>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Compañias productoras</span>
+            </div>
+            <ion-textarea class="form-control-plaintext" [(ngModel)]="movie.production_companies" readonly></ion-textarea>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row mt-2">
+        <ion-col>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Idiomas</span>
+            </div>
+            <ion-input type="text" class="form-control-plaintext" style="display: inline-flex;"
+              [(ngModel)]="movie.spoken_languages" readonly></ion-input>
+          </div>
+        </ion-col>
+      </ion-row>
+      
+      <div class="border-top mt-4"></div>
+      <ion-row class="row justify-content-center mt-2">        
+        <ion-col size-sm="6" size-xs="8">
+          <a routerLink="/home" style="text-decoration: none;">
+            <button type="button" class="btn btn-danger btn-lg btn-block">Regresar</button>
+          </a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
