@@ -62,8 +62,7 @@ export class HomePage implements OnInit {
     }
     this.api.doPetition({ action: action, method: method ,postData: postData})
       .then((serviceResponse: any) => {
-        this.response = serviceResponse.responseBody;
-        console.log(this.response)
+        this.response =  serviceResponse.responseBody;
       }).catch(() => { });
   }
 
@@ -78,8 +77,8 @@ export class HomePage implements OnInit {
         this.lastParameters.page = (Number(this.response.page) + 1);
       }
       this.api.doPetition({ action: action, method: this.lastMethod,postData:this.lastParameters})
-    .then((serviecsResponse: any) => {
-      this.response = serviecsResponse.responseBody;
+    .then((serviceResponse: any) => {
+      this.response = serviceResponse.responseBody;
     }).catch(() => { });
     }
   }
@@ -95,8 +94,8 @@ export class HomePage implements OnInit {
         this.lastParameters.page = (Number(this.response.page) -1);
       }
       this.api.doPetition({ action: action, method: this.lastMethod,postData:this.lastParameters})
-      .then((serviecsResponse: any) => {
-        this.response = serviecsResponse.responseBody;
+      .then((serviceResponse: any) => {
+        this.response = serviceResponse.responseBody;
       }).catch(() => { });
     }
   }

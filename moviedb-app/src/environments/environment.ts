@@ -6,9 +6,9 @@ export const environment = {
   production: false,
   endPoint: 'http://localhost:19011',
   detailAction: '/moviedb/movieDetail/',
-  topRatedAction: '/moviedb/topRatedMovies/',
-  searchAction: '/moviedb/searchMovie/',
-  popularAction: '/moviedb/popularMovies/'
+  topRatedAction: '/moviedb/topRatedMovies',
+  searchAction: '/moviedb/searchMovie',
+  popularAction: '/moviedb/popularMovies'
 };
 
 /*

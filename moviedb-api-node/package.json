@@ -1,0 +1,17 @@
+{
+  "name": "moviedb-api-node",
+  "version": "1.0.0",
+  "description": "Movie DB API Node.JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonathan Barrera",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "node-themoviedb": "^0.2.5"
+  }
+}
